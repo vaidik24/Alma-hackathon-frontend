@@ -1,21 +1,36 @@
 import { useState } from 'react';
 import { dummySuggestions } from '../api';
 import SuggestionModal from '../components/SuggestionModal';
+import CIDSelector from '../components/CIDSelector';
+import SuggestionList from '../components/SuggestionList';
 
 export default function AdminSuggestions() {
+  const [selectedCID, setSelectedCID] = useState('1');
   const [selectedSuggestion, setSelectedSuggestion] = useState(null);
+
+  const handleCIDChange = (e) => {
+    setSelectedCID(e.target.value);
+  };
+
+  const handleTakeAction = (sug) => {
+    setSelectedSuggestion(sug);
+  };
 
   return (
     <div>
-      <h2>Admin Suggestion List</h2>
-      {dummySuggestions.map((sug) => (
-        <div class="suggession_card" key={sug.id} style={{ border: '1px solid gray', padding: '10px', margin: '10px' }}>
-          <h3>{sug.title}</h3>
-          <p>{sug.description}</p>
-          <p class="industry-chip">industry</p>
-          <button onClick={() => setSelectedSuggestion(sug)}>Take Action</button>
-        </div>
-      ))}
+      
+      {/* <h2>Admin Suggestion List</h2> */}
+
+      <CIDSelector selectedCID={selectedCID} onChange={handleCIDChange} />
+
+      <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+        Admin Suggestions
+      </h1>
+      <SuggestionList
+        suggestions={dummySuggestions}
+        selectedCID={selectedCID}
+        onTakeAction={handleTakeAction}
+      />
 
       {selectedSuggestion && (
         <SuggestionModal
