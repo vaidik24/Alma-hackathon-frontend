@@ -7,11 +7,11 @@ export default function SuggestionModal({ suggestion, onClose }) {
 
   return (
     <div style={{ background: '#fff', border: '1px solid #000', padding: 20 }}>
-      <h3>What do you want to do with this suggestion?</h3>
+      <h3 class="suggessionModal_heading">What do you want to do with this suggestion?</h3>
       {!choice && (
         <>
-          <button class="action_button" onClick={() => setChoice('news')}>Create News & Story</button>
-          <button class="action_button" onClick={() => setChoice('event')}>Create Event</button>
+          <button onClick={() => setChoice('news')}>Create News & Story</button>
+          <button class="create_event_btn" onClick={() => setChoice('event')}>Create Event</button>
           <button class="cancel_button" onClick={onClose}>Cancel</button>
         </>
       )}

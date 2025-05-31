@@ -71,3 +71,20 @@
   border: 2px solid #333;
   border-radius: 6px;
 }
+
+.cancel_button {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151; /* gray-700 */
+  background-color: #f3f4f6; /* gray-100 */
+  border: 1px solid #d1d5db; /* gray-300 */
+  border-radius: 0.375rem; /* rounded */
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, color 0.2s;
+}
+
+.cancel_button:hover {
+  background-color: #e5e7eb; /* gray-200 */
+  color: #111827; /* gray-900 */
+}
