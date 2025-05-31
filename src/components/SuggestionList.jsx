@@ -3,11 +3,12 @@
 import { useState } from "react"
 import SuggestionModal from "./SuggestionModal"
 
-export default function SuggestionList({ suggestions }) {
+export default function SuggestionList({ suggestions, selectedCID, onTakeAction }) {
   const [selectedSuggestion, setSelectedSuggestion] = useState(null)
 
   return (
     <div style={{ display: "grid", gap: "1.5rem" }}>
+        Selected CID: {selectedCID} {/* Testing purpose... */}
       {suggestions.map((sug) => (
         <div
           key={sug.id}
@@ -39,7 +40,8 @@ export default function SuggestionList({ suggestions }) {
           </h3>
           <p style={{ color: "#4B5563", marginBottom: "1rem" }}>{sug.description}</p>
           <button
-            onClick={() => setSelectedSuggestion(sug)}
+            // onClick={() => setSelectedSuggestion(sug)}
+             onClick={() => onTakeAction(sug)}
             style={{
               backgroundColor: "#2563eb",
               color: "white",
