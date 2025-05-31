@@ -3,9 +3,9 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* color-scheme: light dark; */
+  /* color: rgba(255, 255, 255, 0.87); */
+  /* background-color: #242424; */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -36,13 +36,17 @@ h1 {
 }
 
 button {
+	background: #0F6CBD;
+	color: #FFFFFF;
+	font-weight: 600;
+	text-transform: none;
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  /* background-color: #1a1a1a; */
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -65,4 +69,57 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.suggession_card {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-size: 16px;
+  font-weight: 400;
+  overflow: hidden;
+  width: 330px;
+  z-index: 1;
+  position: relative;
+  background: rgb(255,255,255);
+  border-radius: 2px;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+
+.suggession_card h3 {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.suggession_card p {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  color: #888;
+}
+
+.suggession_card .industry-chip {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #1f2937; /* dark gray */
+  background-color: #e0f2fe; /* light blue */
+  border: 1px solid #38bdf8; /* blue border */
+  border-radius: 9999px; /* fully rounded */
+  white-space: nowrap;
+}
+
+
+.suggession_card button {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  width: 100%;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
