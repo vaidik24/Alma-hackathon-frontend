@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { dummySuggestions } from '../api';
+import { useState, useEffect } from 'react';
+import axios from "axios";
 import SuggestionModal from '../components/SuggestionModal';
 import CIDSelector from '../components/CIDSelector';
 import SuggestionList from '../components/SuggestionList';
@@ -12,9 +12,27 @@ export default function AdminSuggestions() {
     setSelectedCID(e.target.value);
   };
 
-  const handleTakeAction = (sug) => {
-    setSelectedSuggestion(sug);
-  };
+  const [suggestions, setSuggestions] = useState({ suggestions: [] });
+
+  useEffect(() => {
+    axios.get(`http://localhost:8080/api/fetchSuggestions?cid=${selectedCID}`)
+      .then((response) => {
+        const res = response.data;
+        const transformedSuggestions = res.suggestions.map(suggestion => ({
+          ...suggestion,
+          title: suggestion.source_title,
+          description: suggestion.suggestion_content,
+        }));
+
+        setSuggestions({
+          ...res,
+          suggestions: transformedSuggestions
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching suggestions:", error);
+      });
+  }, [selectedCID]);
 
   return (
     <div>
@@ -27,9 +45,8 @@ export default function AdminSuggestions() {
         Admin Suggestions
       </h1>
       <SuggestionList
-        suggestions={dummySuggestions}
+        suggestions={suggestions}
         selectedCID={selectedCID}
-        onTakeAction={handleTakeAction}
       />
 
       {selectedSuggestion && (
