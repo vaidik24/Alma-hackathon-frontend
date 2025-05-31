@@ -11,7 +11,10 @@ export default function SuggestionModal({ suggestion, onClose }) {
       {!choice && (
         <>
           <button onClick={() => setChoice('news')}>Create News & Story</button>
-          <button class="create_event_btn" onClick={() => setChoice('event')}>Create Event</button>
+          <button class="create_event_btn">Create Campaign</button>
+          <button class="create_event_btn">Create Post</button>
+          <button class="create_event_btn">Create Poll</button>
+          <button class="create_event_btn">Create Event</button>
         </>
       )}
 
