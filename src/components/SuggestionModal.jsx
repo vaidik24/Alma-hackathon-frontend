@@ -6,13 +6,12 @@ export default function SuggestionModal({ suggestion, onClose }) {
   const [choice, setChoice] = useState('');
 
   return (
-    <div style={{ background: '#fff', border: '1px solid #000', padding: 20 }}>
+    <div style={{ background: '#fff', padding: 20 }}>
       <h3 class="suggessionModal_heading">What do you want to do with this suggestion?</h3>
       {!choice && (
         <>
           <button onClick={() => setChoice('news')}>Create News & Story</button>
           <button class="create_event_btn" onClick={() => setChoice('event')}>Create Event</button>
-          <button class="cancel_button" onClick={onClose}>Cancel</button>
         </>
       )}
 
