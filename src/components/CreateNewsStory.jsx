@@ -31,9 +31,9 @@ export default function CreateNewsStory({ suggestion, onClose }) {
     setLoading(prev => ({ ...prev, enhance: true }));
     try {
       const response = await improveDescriptionText(description, 'news');
-      
-      if (response.result && response.result.length > 0) {
-        setDescription(response.result[0]);
+            
+      if (response && response.length > 0) {
+        setDescription(response);
       } else {
         alert("No enhancement suggestions received");
       }
@@ -52,10 +52,10 @@ export default function CreateNewsStory({ suggestion, onClose }) {
 
     setLoading(prev => ({ ...prev, checkErrors: true }));
     try {
-      const response = await correctText(description, 'newsletter');
+      const response = await correctText(description, 'newsarticle');
       
-      if (response.result && response.result.length > 0) {
-        setDescription(response.result[0]);
+      if (response && response.length > 0) {
+        setDescription(response);
         alert("Grammar and spelling checked and corrected!");
       } else {
         alert("No corrections needed or no suggestions received");
@@ -75,10 +75,10 @@ export default function CreateNewsStory({ suggestion, onClose }) {
 
     setLoading(prev => ({ ...prev, paraphrase: true }));
     try {
-      const response = await paraphraseText(description, 'newsletter');
+      const response = await paraphraseText(description, 'newsarticle');
       
-      if (response.result && response.result.length > 0) {
-        setDescription(response.result[0]);
+      if (response && response.length > 0) {
+        setDescription(response);
       } else {
         alert("No paraphrase suggestions received");
       }
@@ -97,11 +97,11 @@ export default function CreateNewsStory({ suggestion, onClose }) {
 
     setLoading(prev => ({ ...prev, improveTitle: true }));
     try {
-      const response = await improveTitleText(title, 'newsletter');
+      const response = await improveTitleText(title, 'newsarticle');
       console.log(response);
       
-      if (response.result && response.result.length > 0) { 
-        setTitle(response.result[0]);
+      if (response && response.length > 0) { 
+        setTitle(response);
       } else {
         alert("No title improvement suggestions received");
       }
@@ -125,13 +125,12 @@ export default function CreateNewsStory({ suggestion, onClose }) {
 
     setLoading(prev => ({ ...prev, generateContent: true }));
     try {
-      const response = await generateIntegratedContent(newsInput, 'newsletter');
+      const response = await generateIntegratedContent(newsInput, 'newsarticle');
       
-      if (response.result) {
+      if (response) {
         // Parse the JSON response from the integrated task
-        const generatedContent = typeof response.result === 'string' 
-          ? JSON.parse(response.result) 
-          : response.result;
+        const generatedContent = response;
+        console.log('Generated Content:', generatedContent);
         
         setTitle(generatedContent.title || '');
         setDescription(generatedContent.description || '');

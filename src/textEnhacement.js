@@ -15,13 +15,25 @@ export const enhanceText = async (task, input, category = 'content') => {
         category
       })
     });
+    // console.log(response);    
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
     const data = await response.json();
-    return data;
+    console.log(data.result);
+    if(task === "correct")
+        return data.result;
+    if(task ==='improve_title' || task === 'improve_description' || task === 'paraphrase')
+        return JSON.parse(data.result)[0];
+    if (task !== 'integrated') {
+        return data.result[0];
+    }
+
+    console.log(`Enhancement result for task "${task}":`, JSON.parse(data.result));
+    
+    return JSON.parse(data.result);
   } catch (error) {
     console.error('Error enhancing text:', error);
     throw error;
