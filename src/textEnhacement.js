@@ -46,5 +46,7 @@ export const improveDescriptionText = (input, category = 'content') => {
 };
 
 export const generateIntegratedContent = (input, category = 'content') => {
+    console.log(category);
+    
   return enhanceText('integrated', input, category);
 };
