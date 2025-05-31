@@ -52,7 +52,7 @@ export default function CreateNewsStory({ suggestion, onClose }) {
 
     setLoading(prev => ({ ...prev, checkErrors: true }));
     try {
-      const response = await correctText(description, 'news');
+      const response = await correctText(description, 'newsletter');
       
       if (response.result && response.result.length > 0) {
         setDescription(response.result[0]);
@@ -75,7 +75,7 @@ export default function CreateNewsStory({ suggestion, onClose }) {
 
     setLoading(prev => ({ ...prev, paraphrase: true }));
     try {
-      const response = await paraphraseText(description, 'news');
+      const response = await paraphraseText(description, 'newsletter');
       
       if (response.result && response.result.length > 0) {
         setDescription(response.result[0]);
@@ -147,9 +147,36 @@ export default function CreateNewsStory({ suggestion, onClose }) {
     }
   };
 
-  const handleClick = () => {
-    console.log("Create button clicked");
+  const handleCreate = async() => {
+    // const url = 'http://localhost/portal/dev/api/campusfeed/addBlogPost';
+    const url2 = 'http://localhost:8080/api/launch-newsletter';
+    // const data = {
+    //   heading: title,
+    //   content: description,
+    //   cid: 3
+    // }
+    const data = {
+      title: title,
+      description: description,
+    }
+    const response = await fetch(url2, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    });
     
+    
+    if (!response.ok) {
+      const error = await response.json();
+      alert("Error creating news story: " + error.message);
+      return;
+    }
+    const result = await response.json();
+    console.log("Response", result);
+    window.open(result.data, '_blank');
+
   }
   return (
     <div style={styles.container}>
@@ -183,7 +210,7 @@ export default function CreateNewsStory({ suggestion, onClose }) {
 
       <div style={styles.buttonGroup}>
         <button onClick={handleGenerateContent} style={{ ...styles.button, ...styles.primary }}>Generate Content</button>
-        <button onClick={handleClick} style={{ ...styles.button, ...styles.primary }}>Create</button>
+        <button onClick={handleCreate} style={{ ...styles.button, ...styles.primary }}>Publish</button>
         <button onClick={onClose} style={{ ...styles.button, ...styles.secondary }}>Cancel</button>
       </div>
 
